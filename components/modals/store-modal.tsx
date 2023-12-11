@@ -4,6 +4,7 @@ import { useState } from 'react'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
+import { toast } from 'react-hot-toast'
 
 
 import { useStoreModal } from '@/hooks/use-store-modal'
@@ -12,7 +13,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-
 
 export function StoreModal (){
 
@@ -27,10 +27,15 @@ export function StoreModal (){
 
             const response = await axios.post('/api/stores', values)
 
-            console.log(response.data)
+            //console.log(response.data)
+
+            //toast.success ("Store " + response.data.name + " Created!")
+
+            window.location.assign(`/${response.data.id}`)
         }
         catch (error){
-            console.log ('<modals store-modal.tsx> --> onSubmit()',error)
+            //console.log ('<modals store-modal.tsx> --> onSubmit()',error)
+            toast.error ("<modals store-modal.tsx> --> onSubmit()> Something went wrong")
         }
         finally{
             setLoading(false)
@@ -50,6 +55,7 @@ export function StoreModal (){
     })
 
     return(
+        
         <Modal 
             title='Create Store'
             description='Add new store to manage products and categories'
@@ -81,6 +87,7 @@ export function StoreModal (){
                             />
 
                             <div className='pt-6 space-x-2 flex items-center justify-end w-full' >
+                            
                                 <Button 
                                     disabled={loading}
                                     variant={'outline'} 
@@ -88,12 +95,13 @@ export function StoreModal (){
                                         Cancel
                                 </Button>
                                 <Button disabled={loading} type='submit'>Continue</Button>
+                                
                             </div>
                         </form>
                     </Form>
+                   
                 </div>
-
             </div>
-        </Modal>
+        </Modal> 
     )
 }
