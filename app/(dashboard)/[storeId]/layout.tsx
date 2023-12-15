@@ -3,6 +3,7 @@ import {redirect} from 'next/navigation'
 
 import prismadb from "@/lib/prismadb";
 import { Navbar } from "@/components/navbar";
+import { Alert } from "@/components/ui/alert";
 
 export default async function DashboardLayout (
     {children, params}:
