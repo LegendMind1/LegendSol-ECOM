@@ -1,26 +1,30 @@
 import {format} from 'date-fns'
 import prismadb from "@/lib/prismadb"
 
-import { BillboardClient } from "./components/client"
-import { BillboardColumn } from "./components/columns"
+import { CategoryClient } from "./components/client"
+import { CategoryColumn } from "./components/columns"
 
-const BillBoardsPage = async ({params}: {params: {storeId: string}}) => {
+const CategoriesPage = async ({params}: {params: {storeId: string}}) => {
 
-    const billboards = await prismadb.billboard.findMany({
+    const categories = await prismadb.category.findMany({
         where:{
             storeId: params.storeId 
+        },
+        include:{
+            billboard:true
         },
         orderBy: {
             createdAt: 'desc'
         }
     })
 
-    // Instead of passing data={billboards} directly to BillboardClient, it must be properly formatted for Data Table component as below:
+    // Instead of passing data={categories} directly to BillboardClient, it must be properly formatted for Data Table component as below:
 
-    const formattedBillboards: BillboardColumn[] =  billboards.map((item) => 
+    const formattedCategories: CategoryColumn[] =  categories.map((item) => 
             ({
                 id: item.id, 
-                label: item.label, 
+                name: item.name, 
+                billboardLabel: item.billboard.label,
                 createdAt:format(item.createdAt, "MMMM do, yyyy") 
             })
         )
@@ -37,11 +41,11 @@ const BillBoardsPage = async ({params}: {params: {storeId: string}}) => {
 
             <div className="flex-col">
                 <div className="flex-1 space-y-4 p-8 pt-6">
-                    <BillboardClient data={formattedBillboards} />
+                    <CategoryClient data={formattedCategories} />
                 </div>
             </div>
         </>
     )
 }
 
-export default BillBoardsPage
+export default CategoriesPage

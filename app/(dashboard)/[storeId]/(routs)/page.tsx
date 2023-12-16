@@ -18,7 +18,7 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({params}) => {
       <div className="flex flex-col items-center">
         <div>Store Name: {store?.name}</div>
         <div>Created on: {store?.createdAt.toDateString()}</div>
-        <div>Updated on: {store?.upatedAt.toDateString()}</div>
+        <div>Updated on: {store?.updatedAt.toDateString()}</div>
       </div>
 
     </>
