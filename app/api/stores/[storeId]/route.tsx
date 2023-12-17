@@ -3,7 +3,6 @@ import { NextResponse } from "next/server"
 
 import prismadb from "@/lib/prismadb"
 
-
 export const PATCH:any = async (req: Request, {params}: {params:{storeId:string}}) => {
     
     try{
@@ -11,7 +10,6 @@ export const PATCH:any = async (req: Request, {params}: {params:{storeId:string}
         const body = await req.json()
 
         const { name } = body
-
 
         if (!userId) {
             return new NextResponse ("Unauthenticated", {status: 401})
