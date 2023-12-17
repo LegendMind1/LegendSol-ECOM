@@ -46,6 +46,12 @@ export const MainNav = ({ className, ...props }: React.HTMLAttributes<HTMLElemen
 
         },
         {
+            href: `/${params.storeId}/colors`,
+            label: 'Colors',
+            active: pathname === `/${params.storeId}/colors`
+
+        },
+        {
             href: `/${params.storeId}/settings`,
             label: 'Settings',
             active: pathname === `/${params.storeId}/settings`
