@@ -71,7 +71,7 @@ export const CellAction: React.FC<CellActionProps> = ({data}) => {
         <div className="flex justify-center">
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant='ghost' className="h-8 w-8 p-0">
+                <Button variant='ghost' className="h-8 w-8 p-0 rounded-full bg-gray-300 hover:bg-yellow-500 hover:rotate-[-180deg] transition-all duration-700">
                     {/* Accessibility feature only screen readers can detect following span */}
                     <span className="sr-only"> 
                         Open Menu
